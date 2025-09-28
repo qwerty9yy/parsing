@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  clickhouse:
+    build: .
+    container_name: clickhouse_container
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ./data:/var/lib/clickhouse
+    restart: always
