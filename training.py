@@ -13,7 +13,6 @@ if response.status_code == 200:
         name = item.find('h3').text.strip()
         description = item.find('p').text.strip()
         price = item.find('span').text.strip()
-        
         print(f'Блюдо: {name}')
         print(f'Описание: {description}')
         print(f'Цена:  {price}')
