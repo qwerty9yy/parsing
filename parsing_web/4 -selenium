@@ -1,0 +1,191 @@
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+import time
+
+# Настройка WebDriver
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+
+# Открываем сайт
+driver.get('http://localhost:8181/pillowmart/')
+
+time.sleep(2)
+
+# Кликаем по элементу с открытием в новой вкладке
+try:
+    # Находим элемент
+    element = driver.find_element(By.XPATH, '/html/body/section[2]/div/div/div/div[2]/div/div[2]/div/a')
+    
+    # Открываем ссылку в новой вкладке через JavaScript
+    driver.execute_script('window.open(arguments[0].href, "_blank");', element)
+    print('Ссылка открыта в новой вкладке!')
+    
+    # Переключаемся на новую вкладку
+    driver.switch_to.window(driver.window_handles[-1])
+    print('Переключились на новую вкладку')
+
+except Exception as e:
+    print('Ошибка при клике по элементу:', e)
+    
+time.sleep(5)
+driver.quit()
+
+
+# ! Открываем браузер и нажимаем на кнопку с помощью XPATH
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.common.by import By
+# import time
+
+# # Настройка WebDriver
+# service = Service(ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+
+# # Открываем сайт
+# driver.get('http://localhost:8181/pillowmart/')
+
+# time.sleep(2)
+
+# # Кликаем по элементу с указанным XPath
+# try:
+#     element = driver.find_element(By.XPATH, '/html/body/section[2]/div/div/div/div[2]/div/div[2]/div/a')
+#     element.click()
+#     print('Клик по элементу выполнен успешно!')
+# except Exception as e:
+#     print('Ошибка при клике по элементу:', e)
+    
+# time.sleep(5)
+# driver.quit()
+
+
+# ! Открыли страницу и пролистали вниз на 1000 пикселей
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+# import time
+
+# # Настройка WebDriver
+# service = Service(ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+
+# # Открываем сайт ya.ru
+# driver.get('http://localhost:8181/pillowmart/')
+
+# driver.execute_script('window.scrollBy(0, 1000)')
+
+# time.sleep(3)
+# driver.quit()
+
+
+# ! Открывем страницу яндекса ждем 15 секунд и переходим в погоду
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.common.by import By
+# import time
+
+# # Настройка WebDriver
+# service = Service(ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+
+# # Открываем сайт ya.ru
+# driver.get('https://ya.ru')
+
+# time.sleep(15) # Ждем загрузку страницы
+
+# # Кликаем по элементу с указанным XPath
+# try:
+#     element = driver.find_element(By.XPATH, '/html/body/main/div[2]/aside/a/div[1]')
+#     element.click() # Выполняем клик
+#     print("Клик по элементу выполнен успешно!")
+# except Exception as e:
+#     print("Ошибка при клике по элементу:", e)
+
+# time.sleep(5) # Ждем, чтобы увидеть результат
+# driver.quit() # Закрываем браузер
+
+
+# ! Открываем браузер, переходимна сайт яндекса и открываем погоду
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.common.by import By
+# import time
+
+# # Настройка WebDriver
+# service = Service(ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+
+# # Открываем сайт ya.ru
+# driver.get('https://ya.ru')
+
+# time.sleep(2)
+
+# # Кликаем по элементу с указанным XPath
+# try:
+#     element = driver.find_element(By.XPATH, '/html/body/main/div[2]/aside/a/div[1]')
+#     element.click() # Выполняем клик
+#     print('Клик по элементу выполнен успешно!')
+# except Exception as e:
+#     print("Ошибка при клике по элементу:", e)
+
+# time.sleep(5) # Ждем, чтобы увидеть результат
+# driver.quit() # Закрываем браузер
+
+
+# ! Открыли браузер и набрали поисковой запрос и зыкрыли браузер(словили капчу)
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.keys import Keys
+# import time
+
+# # Настройка WebDriver
+# service = Service(ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+
+# driver.get('https://www.google.com')
+
+# # Найдем поле поиска по имени
+# search_box = driver.find_element(By.NAME, 'q')
+
+# # Введем запрос и нажмем Enter
+# search_box.send_keys('Команда этого курса легенды')
+# search_box.send_keys(Keys.RETURN)
+
+# time.sleep(5)
+# driver.quit()
+
+
+# ! Открытие браузера и засыпание на 5 секунд и закрытие браузера
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+# import time
+
+# # Настройка WebDriver
+# service = Service(ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+
+# # Открываем Google
+# driver.get('https://www.google.com')
+
+# # Ждем 5 секунд и закрываем браузер
+# time.sleep(5)
+# driver.quit()
+
+
+# ! Открытие браузера на секунду и вывод информации на экран с именем страницы
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+
+# service = Service(ChromeDriverManager().install())
+# driver = webdriver.Chrome(service=service)
+# driver.get('https://www.google.com')
+# print(driver.title)
+# driver.quit()

@@ -1,3 +1,77 @@
+import requests
+from bs4 import BeautifulSoup
+
+# 2. Проверяем статус ответа
+url = 'http://localhost:8181/aznews/blog.html'
+response = requests.get(url)
+
+# 2. Проверяем статус ответа
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    blog_items = soup.find_all('article', class_='blog_item')
+    
+    # 4. Извлекаем данные из каждого блока
+    for blog in blog_items:
+        # Дата (день и месяц)
+        date_section = blog.find('a', class_='blog_item_date')
+        date_day = date_section.find('h3').text.strip()
+        date_month = date_section.find('p').text.strip()
+        date = f'{date_day} {date_month}'
+        
+        # Название
+        title = blog.find('a', class_='d-inline-block').find('h2').text.strip()
+        
+        # Описание
+        description = blog.find('p').text.strip()
+        
+        # Вывод данных
+        print(f"Дата: {date}")
+        print(f"Название: {title}")
+        print(f"Описание: {description}")
+        print("-" * 40)
+
+else:
+    print("Ошибка! Код ответа:", response.status_code)
+
+# import requests
+# from bs4 import BeautifulSoup
+
+# # 1. Отправляем запрос на сайт
+# url = 'http://localhost:8181/aznews/blog.html'
+# response = requests.get(url)
+
+# # 2. Проверяем статус ответа
+# if response.status_code == 200:
+#     soup = BeautifulSoup(response.text, 'html.parser')
+    
+#     # 3. Найдем пост с нужным изображением
+#     target_image = soup.find('img', {
+#         'src': 'assets/img/blog/single_blog_5.png'
+#     })
+#     if target_image:
+#         # Найдем родительский <article>, содержащий этот img
+#         post = target_image.find_parent('article', class_='blog_item')
+        
+#         # Извлекаем дату
+#         date_section = post.find('a', class_='blog_item_date')
+#         date_day = date_section.find('h3').text.strip()
+#         date_month = date_section.find('p').text.strip()
+#         date = f'{date_day} {date_month}'
+        
+#         # Извлекаем название новости
+#         title = post.find('a', class_='d-inline-block').find('h2').text.strip()
+        
+#         description = post.find('p').text.strip()
+        
+#         print(f"Дата: {date}")
+#         print(f"Заголовок: {title}")
+#         print(f"Описание: {description}")
+#     else:
+#         print("Пост с указанным изображением не найден.")
+# else:
+#     print("Ошибка! Код ответа:", response.status_code)
+
 # import requests
 # from bs4 import BeautifulSoup
 
